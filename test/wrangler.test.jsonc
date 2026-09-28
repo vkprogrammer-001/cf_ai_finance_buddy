@@ -1,0 +1,47 @@
+{
+  "$schema": "../node_modules/wrangler/config-schema.json",
+  "name": "cf-ai-finance-buddy-test",
+  "main": "mock-entry.ts",
+  "compatibility_date": "2026-09-01",
+  "compatibility_flags": ["nodejs_compat"],
+  // Keep class names intact so Agent <-> Workflow callbacks can be routed.
+  "keep_names": true,
+
+  // Chat UI (static files served by Workers Static Assets — same as Pages)
+  "assets": {
+    "directory": "../public",
+    "binding": "ASSETS"
+  },
+
+  // LLM: Llama 3.3 on Workers AI
+  "services": [{ "binding": "AI", "service": "cf-ai-finance-buddy-test", "entrypoint": "MockAI" }],
+
+  // Memory / state: one SQLite-backed Durable Object (Agent) per chat session
+  "durable_objects": {
+    "bindings": [
+      {
+        "name": "FinanceBuddy",
+        "class_name": "FinanceBuddy"
+      }
+    ]
+  },
+  "migrations": [
+    {
+      "tag": "v1",
+      "new_sqlite_classes": ["FinanceBuddy"]
+    }
+  ],
+
+  // Coordination: durable multi-step Workflow that distils conversation into memory
+  "workflows": [
+    {
+      "name": "session-insights",
+      "binding": "INSIGHTS_WORKFLOW",
+      "class_name": "InsightsWorkflow"
+    }
+  ],
+
+  "observability": {
+    "enabled": true
+  }
+}

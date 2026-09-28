@@ -1,0 +1,23 @@
+{
+  "name": "cf_ai_finance_buddy",
+  "version": "1.0.0",
+  "description": "FinBuddy: AI finance study companion on Cloudflare (Workers AI + Agents/Durable Objects + Workflows)",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "typegen": "wrangler types",
+    "typecheck": "tsc --noEmit",
+    "dev:mock": "wrangler dev -c test/wrangler.test.jsonc"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "agents": "^0.24.0"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^5.20260927.1",
+    "typescript": "^7.0.2",
+    "wrangler": "^4.142.0"
+  },
+  "private": true,
+  "type": "module"
+}

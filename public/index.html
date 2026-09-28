@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>FinBuddy — AI finance study companion</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <div class="app">
+    <main class="chat">
+      <header class="chat-header">
+        <div>
+          <h1>FinBuddy</h1>
+          <p class="sub">Learn mutual funds, SIPs &amp; investing basics — it remembers you.</p>
+        </div>
+        <button id="toggle-memory" class="ghost mobile-only" aria-controls="memory">Memory</button>
+      </header>
+
+      <section id="messages" class="messages" aria-live="polite"></section>
+
+      <div id="suggestions" class="suggestions">
+        <button class="chip">What is a SIP and how does compounding help?</button>
+        <button class="chip">Index fund vs actively managed fund?</button>
+        <button class="chip">I want to save ₹50L for retirement in 20 years. Where do I start?</button>
+      </div>
+
+      <form id="composer" class="composer">
+        <textarea id="input" rows="1" placeholder="Ask about SIPs, NAV, ELSS, expense ratios…" required></textarea>
+        <button type="button" id="mic" class="icon" title="Speak (voice input)" aria-label="Voice input">🎤</button>
+        <button type="submit" id="send" class="primary">Send</button>
+      </form>
+      <p class="disclaimer">Educational only — not financial advice.</p>
+    </main>
+
+    <aside id="memory" class="memory">
+      <div class="memory-head">
+        <h2>What FinBuddy remembers</h2>
+        <span id="status" class="badge">idle</span>
+        <button id="close-memory" class="ghost mobile-only" aria-label="Close">✕</button>
+      </div>
+
+      <h3>Session summary</h3>
+      <p id="summary" class="muted">Nothing yet — start chatting.</p>
+
+      <h3>Learner profile</h3>
+      <dl id="profile"></dl>
+
+      <div class="memory-actions">
+        <button id="insights" class="secondary">Update memory now</button>
+        <button id="reset" class="ghost danger">Forget everything</button>
+      </div>
+      <p class="muted small">
+        Memory is updated by a Cloudflare Workflow every few messages.
+        Session: <code id="session-id"></code>
+      </p>
+    </aside>
+  </div>
+  <script src="/app.js" type="module"></script>
+</body>
+</html>
